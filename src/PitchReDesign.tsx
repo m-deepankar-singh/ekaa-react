@@ -24,6 +24,7 @@ import work15 from "./images/Our Works/Picture6.jpg";
 import work16 from "./images/Our Works/Picture7.jpg";
 import work17 from "./images/Our Works/Picture8.jpg";
 import work18 from "./images/Our Works/pitvh_77-1.jpg";
+import banner from "./images/Banners/Investor Pitch Deck Re-Design.jpg"
 import { Award, ChevronLeft, ChevronRight, DollarSign, MapPin, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -106,10 +107,10 @@ const PitchReDesign: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Hero Section */}
-      <div className="relative bg-purple-900 text-white py-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-900 to-purple-600 opacity-75"></div>
+      <div className="relative bg-white-900 text-white py-20">
+        <div className="absolute inset-0 "></div>
         <img
-          src="/path-to-hero-image.jpg"
+          src={banner}
           alt="Hero Background"
           className="w-full h-64 object-cover"
         />

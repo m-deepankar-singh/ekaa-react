@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CallbackForm from './CallbackForm';
 import { Plus, Minus } from 'lucide-react';
+import banner from "./images/Banners/Financial Forecast & DCF Valuation.jpg"
 
 const Container: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
   <div className={`container mx-auto px-4 ${className} max-w-6xl`}>{children}</div>
@@ -27,20 +28,49 @@ const FinancialModelling: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-cover bg-center h-[300px] md:h-[400px]" style={{backgroundImage: "url('/api/placeholder/1200/400')"}}>
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
-          <Container>
-            <div className="text-white">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">Financial Forecast & DCF Valuation</h1>
-              <nav className="text-sm mb-4">
-                <a href="/" className="hover:underline">Home</a> /
-                <a href="/services" className="hover:underline"> Our Services</a> /
-                <span> Financial Modelling & Analysis</span>
-              </nav>
-            </div>
-          </Container>
+      <div className="relative h-64 md:h-80 lg:h-96 w-full">
+        <img
+          src={banner}
+          alt="Business Plan Hero"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start p-6 md:p-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+            Financial Modelling
+          </h1>
+          <nav className="text-sm md:text-base text-gray-300">
+            <ol className="list-none p-0 inline-flex">
+              <li className="flex items-center">
+                <a href="/" className="hover:text-white">
+                  Home
+                </a>
+                <svg
+                  className="fill-current w-3 h-3 mx-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                >
+                  <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+              </li>
+              <li className="flex items-center">
+                <a href="/services" className="hover:text-white">
+                  Our Services
+                </a>
+                <svg
+                  className="fill-current w-3 h-3 mx-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 320 512"
+                >
+                  <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" />
+                </svg>
+              </li>
+              <li>
+                <span className="text-gray-500">Financial Modelling</span>
+              </li>
+            </ol>
+          </nav>
         </div>
-      </section>
+      </div>
 
       {/* Main content */}
       <main className="flex-grow py-12">

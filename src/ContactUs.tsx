@@ -26,7 +26,6 @@ const ContactPage: React.FC = () => {
     regarding: '',
     message: '',
   });
-
   const [submitStatus, setSubmitStatus] = useState<{ status: string; message: string } | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -37,15 +36,21 @@ const ContactPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/path/to/your/contact-form-handler.php', formData);
+      const response = await axios.post('/path/to/your/contact-form-handler.php', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       setSubmitStatus(response.data);
       if (response.data.status === 'success') {
         setFormData({ name: '', phone: '', email: '', regarding: '', message: '' });
       }
     } catch (error) {
+      console.error('Error submitting form:', error);
       setSubmitStatus({ status: 'error', message: 'An error occurred. Please try again later.' });
     }
   };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Header */}
@@ -92,8 +97,6 @@ const ContactPage: React.FC = () => {
             <p>3-6-242/6/ Himayat Nagar X Road</p>
             <p>Himayatnagar, Hyderabad</p>
             <p>Telangana – 500029</p>
-
-            
           </div>
 
           {/* Map and Form */}

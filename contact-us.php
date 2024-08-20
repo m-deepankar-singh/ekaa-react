@@ -3,6 +3,11 @@
 error_reporting(0);
 ini_set('display_errors', 0);
 
+// Enable CORS for the domain your React app is hosted on
+header("Access-Control-Allow-Origin: *"); // Replace * with your domain in production
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+
 // Function to sanitize input
 function sanitize_input($data) {
     $data = trim($data);
@@ -13,16 +18,23 @@ function sanitize_input($data) {
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the raw POST data
+    $json = file_get_contents('php://input');
+    
+    // Decode the JSON data
+    $data = json_decode($json, true);
+
     // Retrieve form data
-    $name = sanitize_input($_POST['name']);
-    $phone = sanitize_input($_POST['phone']);
-    $email = sanitize_input($_POST['email']);
-    $regarding = sanitize_input($_POST['regarding']);
-    $message = sanitize_input($_POST['message']);
+    $name = sanitize_input($data['name'] ?? '');
+    $phone = sanitize_input($data['phone'] ?? '');
+    $email = sanitize_input($data['email'] ?? '');
+    $regarding = sanitize_input($data['regarding'] ?? '');
+    $message = sanitize_input($data['message'] ?? '');
+    $human = isset($data['human']) ? filter_var($data['human'], FILTER_VALIDATE_BOOLEAN) : false;
 
     // Validate inputs
-    if (empty($name) || empty($phone) || empty($email) || empty($regarding)) {
-        echo json_encode(["status" => "error", "message" => "Please fill all required fields."]);
+    if (empty($name) || empty($phone) || empty($email) || empty($regarding) || !$human) {
+        echo json_encode(["status" => "error", "message" => "Please fill all required fields and confirm you're not a robot."]);
         exit;
     }
 
@@ -32,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Compose email
-    $to = "singh.deepankar39@gmail.com"; // Replace with your email address
+    $to = "your-email@example.com"; // Replace with your email address
     $subject = "New Contact Form Submission";
     $email_content = "Name: $name\n";
     $email_content .= "Phone: $phone\n";

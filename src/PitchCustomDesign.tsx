@@ -44,6 +44,7 @@ import icon1 from "./images/Achivements/icon1.png";
 import icon2 from "./images/Achivements/icon2.png";
 import icon3 from "./images/Achivements/icon3.png";
 import icon4 from "./images/Achivements/icon4.png";
+import banner from "./images/Banners/Investor Pitch Deck Custom Design.jpg"
 
 
 
@@ -191,7 +192,7 @@ useEffect(() => {
       {/* Hero Section */}
       <div className="relative">
         <img
-          src="/api/placeholder/1920/400"
+          src={banner}
           alt="Pitch deck custom design hero"
           className="w-full h-64 object-cover"
         />

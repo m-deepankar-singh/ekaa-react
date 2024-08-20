@@ -1,15 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Twitter, MapPin, Phone, Mail } from "lucide-react";
+import { Facebook, Linkedin, Twitter } from "lucide-react";
 import elogo from "./images/Logos/E  white.png";
 import logo from "./images/Logos/Ekaa In white-10.png";
 
 const Footer: React.FC = () => {
-  const address =
-    "A1&2, II Floor, Green Channel Apts, Khairtabad, Hyderabad-500 004, Telangana, India";
-  const encodedAddress = encodeURIComponent(address);
-  const phoneNumber = "+91-901-022-1000";
-  const email = "info@ekaapitch.com";
 
   return (
     <footer className="bg-black text-white py-8">
@@ -110,28 +105,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm mb-2 md:mb-0">
-            Copyright © {new Date().getFullYear()} Ekaa Business Solution
-          </p>
-          <div className="flex flex-col md:flex-row items-center">
-            <a
-              href={`mailto:${email}`}
-              className="flex items-center mb-2 md:mb-0 md:mr-4 hover:text-gray-300"
-            >
-              <Mail size={18} className="mr-2" />
-              <span>{email}</span>
-            </a>
-            <a
-              href={`tel:${phoneNumber.replace(/[-\s]/g, "")}`}
-              className="flex items-center hover:text-gray-300"
-            >
-              <Phone size={18} className="mr-2" />
-              <span>{phoneNumber}</span>
-            </a>
-          </div>
-          <img src={elogo} alt="E Logo" className="h-8 mt-2 md:mt-0" />
-        </div>
       </div>
     </footer>
   );

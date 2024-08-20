@@ -8,6 +8,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import CallbackForm from "./CallbackForm";
+import banner from "./images/Banners/Business Plan.jpg"
 
 const Container: React.FC<{
   children: React.ReactNode;
@@ -37,7 +38,7 @@ const BusinessPlan: React.FC = () => {
       {/* Hero Section */}
       <div className="relative h-64 md:h-80 lg:h-96 w-full">
         <img
-          src="/api/placeholder/1200/400"
+          src={banner}
           alt="Business Plan Hero"
           className="w-full h-full object-cover"
         />
