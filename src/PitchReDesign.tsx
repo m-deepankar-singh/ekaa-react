@@ -25,6 +25,7 @@ import work16 from "./images/Our Works/Picture7.jpg";
 import work17 from "./images/Our Works/Picture8.jpg";
 import work18 from "./images/Our Works/pitvh_77-1.jpg";
 import { Award, ChevronLeft, ChevronRight, DollarSign, MapPin, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Container: React.FC<{
   children: React.ReactNode;
@@ -270,9 +271,11 @@ const PitchReDesign: React.FC = () => {
               <h2 className="text-3xl font-bold">
                 YOUR PITCH DECK NEEDS TO STAND OUT
               </h2>
-              <button className="bg-white text-purple-600 px-6 py-2 rounded-full font-bold hover:bg-purple-100 transition duration-300">
-                Contact Us
-              </button>
+              <Link to="/contact-us">
+                <button className="bg-white text-purple-600 px-6 py-2 rounded-full font-bold hover:bg-purple-100 transition duration-300">
+                  Contact Us
+                </button>
+              </Link>
             </Container>
           </div>
 

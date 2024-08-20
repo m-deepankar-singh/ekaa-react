@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Users, MapPin, Phone } from 'lucide-react';
+import axios from 'axios';
 
 // Fix for default marker icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -18,7 +19,33 @@ const Container: React.FC<{ children: React.ReactNode; className?: string }> = (
 
 const ContactPage: React.FC = () => {
   const position: [number, number] = [17.412534692566894, 78.45998225173368]; // Coordinates for Hyderabad
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    regarding: '',
+    message: '',
+  });
 
+  const [submitStatus, setSubmitStatus] = useState<{ status: string; message: string } | null>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('/path/to/your/contact-form-handler.php', formData);
+      setSubmitStatus(response.data);
+      if (response.data.status === 'success') {
+        setFormData({ name: '', phone: '', email: '', regarding: '', message: '' });
+      }
+    } catch (error) {
+      setSubmitStatus({ status: 'error', message: 'An error occurred. Please try again later.' });
+    }
+  };
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       {/* Header */}
@@ -71,52 +98,93 @@ const ContactPage: React.FC = () => {
 
           {/* Map and Form */}
           <div className="lg:w-2/3 mt-10 lg:mt-0">
-            
-
             <div className="bg-white p-8 rounded-lg shadow-md">
               <h2 className="text-2xl font-bold mb-6 text-gray-800">Reach Us</h2>
-              <form className="space-y-6">
+              {submitStatus && (
+                <div className={`mb-4 p-2 rounded ${submitStatus.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                  {submitStatus.message}
+                </div>
+              )}
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-                    <input type="text" id="name" placeholder="Enter Name" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      placeholder="Enter Name"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                      required
+                    />
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-                    <input type="tel" id="phone" placeholder="Enter Phone Number" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required />
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder="Enter Phone Number"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                      required
+                    />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email address *</label>
-                  <input type="email" id="email" placeholder="Enter Email address" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="Enter Email address"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    required
+                  />
                 </div>
                 <div>
                   <label htmlFor="regarding" className="block text-sm font-medium text-gray-700 mb-1">Regarding *</label>
-                  <select id="regarding" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500" required defaultValue="">
-                    <option value="Call Back/Free Consultation" >Call Back/Free Consultation</option>
+                  <select
+                    id="regarding"
+                    name="regarding"
+                    value={formData.regarding}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    required
+                  >
+                    <option value="">Select an option</option>
+                    <option value="Call Back/Free Consultation">Call Back/Free Consultation</option>
                     <option value="redesign">Re-design</option>
                     <option value="custom-design">Custom Design</option>
                     <option value="forecast-valuation">Forecast & Valuation</option>
-                    <option value="Business-paln">Business Plan</option>
+                    <option value="Business-plan">Business Plan</option>
                     <option value="general-inquiry">General Inquiry</option>
                     <option value="other">Other</option>
-
                   </select>
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
-                  <textarea id="message" placeholder="Enter Your Message" className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500" rows={4}></textarea>
-                </div>
-                <div className="flex items-center">
-                  <input type="checkbox" id="human" className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded" required />
-                  <label htmlFor="human" className="ml-2 block text-sm text-gray-900">I'm not a robot</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    placeholder="Enter Your Message"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    rows={4}
+                  ></textarea>
                 </div>
                 <button type="submit" className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition duration-150 ease-in-out">
                   Submit
                 </button>
               </form>
             </div>
-            <div className="h-96 mb-10 shadow-md rounded-lg overflow-hidden relative z-0">
+            <div className="h-96 mt-10 shadow-md rounded-lg overflow-hidden relative z-0">
               <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
                 <TileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

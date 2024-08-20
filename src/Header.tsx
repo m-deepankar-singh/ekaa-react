@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "./images/Logos/Ekaa Pitch Services-08.png";
+import MobileHeader from "./MobileHeader";
 
 const Container: React.FC<{
   children: React.ReactNode;
@@ -38,6 +39,8 @@ const Dropdown: React.FC<{ items: { label: string; link: string }[] }> = ({
 );
 
 const Header: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const serviceItems = [
     {
       label: "Investor Pitch Deck - ReDesign",
@@ -56,77 +59,100 @@ const Header: React.FC = () => {
 
   const portfolioItems = [
     { label: "Pitch Decks", link: "/portfolio/pitches" },
-    { label: "Slide designs", link: "/portfolio/slide-designs" },
+    { label: "Slide designs", link: "/portfolio/slide-design" },
   ];
 
   return (
-    <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-      <Container className="py-4 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">
-          <img src={logo} alt="EKA Pitch Services" className="h-10" />
-        </Link>
-        <nav className="hidden lg:block">
-          <ul className="flex space-x-6 items-center">
-            <li>
-              <Link
-                to="/"
-                className="text-gray-700 hover:text-purple-700 font-bold"
+    <>
+      <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <Container className="py-4 flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold">
+            <img src={logo} alt="EKA Pitch Services" className="h-10" />
+          </Link>
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="text-gray-700 focus:outline-none"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about-us"
-                className="text-gray-700 hover:text-purple-700 font-bold"
-              >
-                About Us
-              </Link>
-            </li>
-            <li className="group relative">
-              <Link
-                to="/services"
-                className="text-gray-700 hover:text-purple-700 font-bold pb-2"
-              >
-                Services
-              </Link>
-              <Dropdown items={serviceItems} />
-            </li>
-            <li className="group relative">
-              <Link
-                to="/portfolio"
-                className="text-gray-700 hover:text-purple-700 font-bold pb-2"
-              >
-                Portfolio
-              </Link>
-              <Dropdown items={portfolioItems} />
-            </li>
-            <li>
-              <Link
-                to="/blog"
-                className="text-gray-700 hover:text-purple-700 font-bold"
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact-us"
-                className="text-gray-700 hover:text-purple-700 font-bold"
-              >
-                Contact Us
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        <button
-          className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 font-bold"
-          onClick={() => (window.location.href = "/contact-us")}
-        >
-          Request a Call Back
-        </button>
-      </Container>
-    </header>
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+          <nav className="hidden lg:block">
+            <ul className="flex space-x-6 items-center">
+              <li>
+                <Link
+                  to="/"
+                  className="text-gray-700 hover:text-purple-700 font-bold"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about-us"
+                  className="text-gray-700 hover:text-purple-700 font-bold"
+                >
+                  About Us
+                </Link>
+              </li>
+              <li className="group relative">
+                <Link
+                  to="/services"
+                  className="text-gray-700 hover:text-purple-700 font-bold pb-2"
+                >
+                  Services
+                </Link>
+                <Dropdown items={serviceItems} />
+              </li>
+              <li className="group relative">
+                <Link
+                  to="/portfolio"
+                  className="text-gray-700 hover:text-purple-700 font-bold pb-2"
+                >
+                  Portfolio
+                </Link>
+                <Dropdown items={portfolioItems} />
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className="text-gray-700 hover:text-purple-700 font-bold"
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact-us"
+                  className="text-gray-700 hover:text-purple-700 font-bold"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <button
+            className="hidden lg:block bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 font-bold"
+            onClick={() => (window.location.href = "/contact-us")}
+          >
+            Request a Call Back
+          </button>
+        </Container>
+      </header>
+      {isMobileMenuOpen && (
+        <MobileHeader onClose={() => setIsMobileMenuOpen(false)} />
+      )}
+    </>
   );
 };
 

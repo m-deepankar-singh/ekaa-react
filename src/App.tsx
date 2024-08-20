@@ -15,9 +15,10 @@ import WhatsAppButton from './WhatsApp';
 import PrivacyPolicy from './PP';
 import CookiePolicy from './CookiePolicy';
 import Portfolio from './Portfolio';
+import SlideDesign from './SlideDesign';
+import ScrollToTop from './ScrollToTop';
 
 // Placeholder components for other pages
-const PortfolioPage: React.FC = () => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Portfolio</h1></div>;
 const BlogPage: React.FC = () => <div className="container mx-auto px-4 py-8"><h1 className="text-3xl font-bold">Blog</h1></div>;
 
 const App: React.FC = () => {
@@ -41,6 +42,7 @@ const App: React.FC = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about-us" element={<AboutPage />} />
@@ -49,12 +51,13 @@ const App: React.FC = () => {
           <Route path="/services/investor-pitch-deck-custom" element={<PitchCustomDesign />} />
           <Route path="/services/business-plan" element={<BusinessPlan />} />
           <Route path="/services/financial-modeling" element={<FinancialModelling />} />
-          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/cookies-policy" element={<CookiePolicy />} />
           <Route path="/portfolio/pitches" element={<Portfolio />} />
+          <Route path="/portfolio/slide-design" element={<SlideDesign />} />
+
         </Routes>
       </main>
       <Footer />

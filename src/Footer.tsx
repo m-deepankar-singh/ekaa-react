@@ -84,20 +84,40 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p className="mb-2">Ekaa Business Solutions</p>
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start mb-2 hover:text-gray-300"
-            >
-              <MapPin size={18} className="mr-2 mt-1 flex-shrink-0" />
-              <span>{address}</span>
-            </a>
+            <h3 className="text-lg font-semibold mb-4">Our Services</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/services/investor-pitch-deck-redesign" className="hover:text-gray-300">
+                  Investor Pitch Deck ReDesign
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/investor-pitch-deck-custom" className="hover:text-gray-300">
+                  Investor Pitch Deck Custom Design
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/business-plan" className="hover:text-gray-300">
+                  Business Plan
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/financial-modeling" className="hover:text-gray-300">
+                  Financial Modelling
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-8 pt-4 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm mb-2 md:mb-0">
+            Copyright © {new Date().getFullYear()} Ekaa Business Solution
+          </p>
+          <div className="flex flex-col md:flex-row items-center">
             <a
               href={`mailto:${email}`}
-              className="flex items-center mb-2 hover:text-gray-300"
+              className="flex items-center mb-2 md:mb-0 md:mr-4 hover:text-gray-300"
             >
               <Mail size={18} className="mr-2" />
               <span>{email}</span>
@@ -110,13 +130,7 @@ const Footer: React.FC = () => {
               <span>{phoneNumber}</span>
             </a>
           </div>
-        </div>
-
-        <div className="mt-8 pt-4 border-t border-gray-700 flex justify-between items-center">
-          <p className="text-sm">
-            Copyright © {new Date().getFullYear()} Ekaa Business Solution
-          </p>
-          <img src={elogo} alt="E Logo" className="h-8" />
+          <img src={elogo} alt="E Logo" className="h-8 mt-2 md:mt-0" />
         </div>
       </div>
     </footer>

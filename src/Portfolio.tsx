@@ -1,12 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-// Import your images
-import work1 from "./images/Our Works/Ekaa-Pitch-Our-Works-1.jpg";
-import work2 from "./images/Our Works/Ekaa-Pitch-Our-Works-2.jpg";
-import work3 from "./images/Our Works/Ekaa-Pitch-Our-Works-7.jpg";
-import work4 from "./images/Our Works/Ekaa-Pitch-Our-Works-4.jpg";
-import work5 from "./images/Our Works/Ekaa-Pitch-Our-Works-8.jpg";
 
 // Import before-after images (you'll need to add these to your project)
 import work1Before from "./images/Before & After/Before-1.jpg";
@@ -19,43 +13,82 @@ import work3After from "./images/Before & After/After 3.png";
 // Import your background image
 import backgroundImage from "./images/About Us/About Ekaa.jpg";
 
-import agro from "./images/ClientsPortPage/1.jpg"
-import bigtruck from "./images/ClientsPortPage/2.jpg"
-import codecrux from "./images/ClientsPortPage/3.jpg"
-import stay from "./images/ClientsPortPage/4.jpg"
-import royal from "./images/ClientsPortPage/5.jpg"
-import nn from "./images/ClientsPortPage/6.jpg"
-import daisy from "./images/ClientsPortPage/7.jpg"
-import workful from "./images/ClientsPortPage/8.jpg"
-import geek from "./images/ClientsPortPage/9.jpg"
-import g from "./images/ClientsPortPage/10.jpg"
-import sampark from "./images/ClientsPortPage/11.jpg"
-import pharmacy from "./images/ClientsPortPage/12.jpg"
-import rr from "./images/ClientsPortPage/13.jpg"
-import pets from "./images/ClientsPortPage/14.jpg"
-import play from "./images/ClientsPortPage/15.jpg"
-import ranch from "./images/ClientsPortPage/16.jpg"
-import sharda from "./images/ClientsPortPage/17.jpg"
-import health from "./images/ClientsPortPage/18.jpg"
-import dmr from "./images/ClientsPortPage/19.jpg"
-import relipay from "./images/ClientsPortPage/20.jpg"
-import asset from "./images/ClientsPortPage/21.jpg"
-import scalar from "./images/ClientsPortPage/22.jpg"
-import drreddy from "./images/ClientsPortPage/23.png"
-import renew from "./images/ClientsPortPage/24.jpg"
-import rusk from "./images/ClientsPortPage/25.jpg"
-import scitext from "./images/ClientsPortPage/26.jpg"
-import zero from "./images/ClientsPortPage/27.jpg"
-import sagar from "./images/ClientsPortPage/28.jpg"
-import purple from "./images/ClientsPortPage/29.jpg"
-import level from "./images/ClientsPortPage/30.jpg"
-import pulp from "./images/ClientsPortPage/31.jpg"
-import reset from "./images/ClientsPortPage/32.jpg"
-import akshara from "./images/ClientsPortPage/33.jpg"
-import bistro from "./images/ClientsPortPage/34.jpg"
-import lens from "./images/ClientsPortPage/35.jpg"
-import forest from "./images/ClientsPortPage/36.jpg"
+import agro from "./images/ClientsPortPage/1.jpg";
+import bigtruck from "./images/ClientsPortPage/2.jpg";
+import codecrux from "./images/ClientsPortPage/3.jpg";
+import stay from "./images/ClientsPortPage/4.jpg";
+import royal from "./images/ClientsPortPage/5.jpg";
+import nn from "./images/ClientsPortPage/6.jpg";
+import daisy from "./images/ClientsPortPage/7.jpg";
+import workful from "./images/ClientsPortPage/8.jpg";
+import geek from "./images/ClientsPortPage/9.jpg";
+import g from "./images/ClientsPortPage/10.jpg";
+import sampark from "./images/ClientsPortPage/11.jpg";
+import pharmacy from "./images/ClientsPortPage/12.jpg";
+import rr from "./images/ClientsPortPage/13.jpg";
+import pets from "./images/ClientsPortPage/14.jpg";
+import play from "./images/ClientsPortPage/15.jpg";
+import ranch from "./images/ClientsPortPage/16.jpg";
+import sharda from "./images/ClientsPortPage/17.jpg";
+import health from "./images/ClientsPortPage/18.jpg";
+import dmr from "./images/ClientsPortPage/19.jpg";
+import relipay from "./images/ClientsPortPage/20.jpg";
+import asset from "./images/ClientsPortPage/21.jpg";
+import scalar from "./images/ClientsPortPage/22.jpg";
+import drreddy from "./images/ClientsPortPage/23.png";
+import renew from "./images/ClientsPortPage/24.jpg";
+import rusk from "./images/ClientsPortPage/25.jpg";
+import scitext from "./images/ClientsPortPage/26.jpg";
+import zero from "./images/ClientsPortPage/27.jpg";
+import sagar from "./images/ClientsPortPage/28.jpg";
+import purple from "./images/ClientsPortPage/29.jpg";
+import level from "./images/ClientsPortPage/30.jpg";
+import pulp from "./images/ClientsPortPage/31.jpg";
+import reset from "./images/ClientsPortPage/32.jpg";
+import akshara from "./images/ClientsPortPage/33.jpg";
+import bistro from "./images/ClientsPortPage/34.jpg";
+import lens from "./images/ClientsPortPage/35.jpg";
+import forest from "./images/ClientsPortPage/36.jpg";
 
+import showcase1 from "./images/Showcase/1/1.jpg";
+import showcase2 from "./images/Showcase/1/2.jpg";
+import showcase3 from "./images/Showcase/1/3.jpg";
+import showcase4 from "./images/Showcase/1/4.jpg";
+import showcase5 from "./images/Showcase/1/5.jpg";
+import showcase6 from "./images/Showcase/1/6.jpg";
+import showcase7 from "./images/Showcase/1/7.jpg";
+import showcase8 from "./images/Showcase/1/8.jpg";
+import showcase9 from "./images/Showcase/1/9.jpg";
+import showcase10 from "./images/Showcase/1/10.jpg";
+import showcase11 from "./images/Showcase/1/11.jpg";
+import showcase12 from "./images/Showcase/1/12.jpg";
+import showcase13 from "./images/Showcase/1/13.jpg";
+import showcase14 from "./images/Showcase/1/14.jpg";
+import showcase15 from "./images/Showcase/1/15.jpg";
+import showcase16 from "./images/Showcase/1/16.jpg";
+import showcase17 from "./images/Showcase/1/17.jpg";
+import showcase18 from "./images/Showcase/1/18.jpg";
+
+import showcase2_1 from "./images/Showcase/2/1.jpg"
+import showcase2_2 from "./images/Showcase/2/2.jpg"
+import showcase2_3 from "./images/Showcase/2/3.jpg"
+import showcase2_4 from "./images/Showcase/2/4.jpg"
+import showcase2_5 from "./images/Showcase/2/5.jpg"
+import showcase2_6 from "./images/Showcase/2/6.jpg"
+import showcase2_7 from "./images/Showcase/2/7.jpg"
+import showcase2_8 from "./images/Showcase/2/8.jpg"
+import showcase2_9 from "./images/Showcase/2/9.jpg"
+import showcase2_10 from "./images/Showcase/2/10.jpg"
+import showcase2_11 from "./images/Showcase/2/11.jpg"
+import showcase2_12 from "./images/Showcase/2/12.jpg"
+import showcase2_13 from "./images/Showcase/2/13.jpg"
+import showcase2_14 from "./images/Showcase/2/14.jpg"
+import showcase2_15 from "./images/Showcase/2/15.jpg"
+import showcase2_16 from "./images/Showcase/2/16.jpg"
+import showcase2_17 from "./images/Showcase/2/17.jpg"
+import showcase2_18 from "./images/Showcase/2/18.jpg"
+import showcase2_19 from "./images/Showcase/2/19.jpg"
+import showcase2_20 from "./images/Showcase/2/20.jpg"
 
 const clientLogos = [
   { name: "AgroBEET", logo: agro },
@@ -93,12 +126,10 @@ const clientLogos = [
   { name: "Akshara Foundation", logo: akshara },
   { name: "Bistro", logo: bistro },
   { name: "Lens", logo: lens },
-  { name: "Forest Essentials", logo: forest }
+  { name: "Forest Essentials", logo: forest },
 ];
 
 interface Slide {
-  title: string;
-  date: string;
   image: string;
 }
 
@@ -164,12 +195,49 @@ const Portfolio: React.FC = () => {
   const [currentBeforeAfterSlide, setCurrentBeforeAfterSlide] = useState(0);
 
   const slides: Slide[] = [
-    { title: "Investor Pitch Deck 1", date: "May 2021", image: work1 },
-    { title: "Investor Pitch Deck 2", date: "June 2021", image: work2 },
-    { title: "Investor Pitch Deck 3", date: "July 2021", image: work3 },
-    { title: "Investor Pitch Deck 4", date: "August 2021", image: work4 },
-    { title: "Investor Pitch Deck 5", date: "September 2021", image: work5 },
+    { image: showcase1 },
+    { image: showcase2 },
+    { image: showcase3 },
+    { image: showcase4 },
+    { image: showcase5 },
+    { image: showcase6 },
+    { image: showcase7 },
+    { image: showcase8 },
+    { image: showcase9 },
+    { image: showcase10 },
+    { image: showcase11 },
+    { image: showcase12 },
+    { image: showcase13 },
+    { image: showcase14 },
+    { image: showcase15 },
+    { image: showcase16 },
+    { image: showcase17 },
+    { image: showcase18 },
   ];
+
+  const slides2: Slide[] = [
+    { image: showcase2_1 },
+    { image: showcase2_2 },
+    { image: showcase2_3 },
+    { image: showcase2_4 },
+    { image: showcase2_5 },
+    { image: showcase2_6 },
+    { image: showcase2_7 },
+    { image: showcase2_8 },
+    { image: showcase2_9 },
+    { image: showcase2_10 },
+    { image: showcase2_11 },
+    { image: showcase2_12 },
+    { image: showcase2_13 },
+    { image: showcase2_14 },
+    { image: showcase2_15 },
+    { image: showcase2_16 },
+    { image: showcase2_17 },
+    { image: showcase2_18 },
+    { image: showcase2_19 },
+    { image: showcase2_20 },
+  ];
+  
 
   const beforeAfterSlides: BeforeAfterSlideProps[] = [
     {
@@ -229,48 +297,43 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
       </div>
-
-
-      {/* Square Slide Carousel */}
+      {/* 16:9 Rectangle Carousel */}
       <div className="container mx-auto px-4 py-16">
-        {/* <h2 className="text-3xl font-bold mb-8">Our Pitch Decks</h2> */}
         <div className="relative">
           <div className="flex justify-center items-center">
             {/* Previous Slide Preview */}
-            <div className="hidden md:block w-1/5 aspect-square mr-4 opacity-50 transform scale-75">
-              <img
-                src={slides[getSlideIndex(-1)].image}
-                alt="Previous slide"
-                className="w-full h-full object-cover rounded-lg shadow-md"
-              />
+            <div className="hidden md:block w-1/5 mr-4 opacity-50 transform scale-75">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  src={slides[getSlideIndex(-1)].image}
+                  alt="Previous slide"
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </div>
             </div>
 
             {/* Current Slide */}
-            <div className="w-3/5 aspect-square">
-              <div className="w-full h-full bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="h-3/4 overflow-hidden">
+            <div className="w-3/5">
+              <div className="aspect-w-16 aspect-h-9">
+                <div className="w-full h-full bg-white rounded-lg shadow-lg overflow-hidden">
                   <img
                     src={slides[currentSlide].image}
-                    alt={slides[currentSlide].title}
+                    alt=""
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="h-1/4 p-4 flex flex-col justify-center">
-                  <h3 className="text-xl font-semibold mb-1 truncate">
-                    {slides[currentSlide].title}
-                  </h3>
-                  <p className="text-gray-600">{slides[currentSlide].date}</p>
                 </div>
               </div>
             </div>
 
             {/* Next Slide Preview */}
-            <div className="hidden md:block w-1/5 aspect-square ml-4 opacity-50 transform scale-75">
-              <img
-                src={slides[getSlideIndex(1)].image}
-                alt="Next slide"
-                className="w-full h-full object-cover rounded-lg shadow-md"
-              />
+            <div className="hidden md:block w-1/5 ml-4 opacity-50 transform scale-75">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  src={slides[getSlideIndex(1)].image}
+                  alt="Next slide"
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </div>
             </div>
           </div>
 
@@ -302,47 +365,43 @@ const Portfolio: React.FC = () => {
           ))}
         </div>
       </div>
-
-            {/* Square Slide Carousel */}
-            <div className="container mx-auto px-4 py-16">
-        {/* <h2 className="text-3xl font-bold mb-8">Our Pitch Decks</h2> */}
+      {/* 16:9 Rectangle Carousel */}
+      <div className="container mx-auto px-4 py-16">
         <div className="relative">
           <div className="flex justify-center items-center">
             {/* Previous Slide Preview */}
-            <div className="hidden md:block w-1/5 aspect-square mr-4 opacity-50 transform scale-75">
-              <img
-                src={slides[getSlideIndex(-1)].image}
-                alt="Previous slide"
-                className="w-full h-full object-cover rounded-lg shadow-md"
-              />
+            <div className="hidden md:block w-1/5 mr-4 opacity-50 transform scale-75">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  src={slides2[getSlideIndex(-1)].image}
+                  alt="Previous slide"
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </div>
             </div>
 
             {/* Current Slide */}
-            <div className="w-3/5 aspect-square">
-              <div className="w-full h-full bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="h-3/4 overflow-hidden">
+            <div className="w-3/5">
+              <div className="aspect-w-16 aspect-h-9">
+                <div className="w-full h-full bg-white rounded-lg shadow-lg overflow-hidden">
                   <img
-                    src={slides[currentSlide].image}
-                    alt={slides[currentSlide].title}
+                    src={slides2[currentSlide].image}
+                    alt=""
                     className="w-full h-full object-cover"
                   />
-                </div>
-                <div className="h-1/4 p-4 flex flex-col justify-center">
-                  <h3 className="text-xl font-semibold mb-1 truncate">
-                    {slides[currentSlide].title}
-                  </h3>
-                  <p className="text-gray-600">{slides[currentSlide].date}</p>
                 </div>
               </div>
             </div>
 
             {/* Next Slide Preview */}
-            <div className="hidden md:block w-1/5 aspect-square ml-4 opacity-50 transform scale-75">
-              <img
-                src={slides[getSlideIndex(1)].image}
-                alt="Next slide"
-                className="w-full h-full object-cover rounded-lg shadow-md"
-              />
+            <div className="hidden md:block w-1/5 ml-4 opacity-50 transform scale-75">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  src={slides2[getSlideIndex(1)].image}
+                  alt="Next slide"
+                  className="w-full h-full object-cover rounded-lg shadow-md"
+                />
+              </div>
             </div>
           </div>
 
@@ -363,7 +422,7 @@ const Portfolio: React.FC = () => {
 
         {/* Pagination Dots */}
         <div className="flex justify-center mt-4">
-          {slides.map((_, index) => (
+          {slides2.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
@@ -374,9 +433,6 @@ const Portfolio: React.FC = () => {
           ))}
         </div>
       </div>
-
-
-
       {/* Before-After Slider Section */}
       <div className="container mx-auto px-4 py-16 bg-gray-100">
         <h2 className="text-3xl font-bold mb-8 text-center">
@@ -419,11 +475,17 @@ const Portfolio: React.FC = () => {
       </div>{" "}
       {/* Client Logos Section */}
       <div className="container mx-auto px-4 py-16 bg-gray-100">
-        <h2 className="text-3xl font-bold mb-8 text-center">Some Of Our Happy Clients</h2>
+        <h2 className="text-3xl font-bold mb-8 text-center">
+          Some Of Our Happy Clients
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {clientLogos.map((client, index) => (
             <div key={index} className="flex items-center justify-center p-8">
-              <img src={client.logo} alt={client.name} className="max-w-full max-h-24 object-contain" />
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="max-w-full max-h-24 object-contain"
+              />
             </div>
           ))}
         </div>
