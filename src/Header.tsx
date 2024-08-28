@@ -115,21 +115,12 @@ const Header: React.FC = () => {
                 <Dropdown items={serviceItems} />
               </li>
               <li className="group relative">
-                <Link
-                  to="/portfolio"
-                  className="text-gray-700 hover:text-purple-700 font-bold pb-2"
+                <span
+                  className="text-gray-700 hover:text-purple-700 font-bold cursor-default pb-2"
                 >
                   Portfolio
-                </Link>
+                </span>
                 <Dropdown items={portfolioItems} />
-              </li>
-              <li>
-                <Link
-                  to="/blog"
-                  className="text-gray-700 hover:text-purple-700 font-bold"
-                >
-                  Blog
-                </Link>
               </li>
               <li>
                 <Link

@@ -50,7 +50,7 @@ import akshara from "./images/ClientsPortPage/33.jpg";
 import bistro from "./images/ClientsPortPage/34.jpg";
 import lens from "./images/ClientsPortPage/35.jpg";
 import forest from "./images/ClientsPortPage/36.jpg";
-
+import banner from "./images/Slide Design Banner.jpg"
 
 interface ImageData {
   id: number;
@@ -127,10 +127,18 @@ const SlideDesign: React.FC = () => {
   return (
     <div className="w-full">
       {/* Full-width Banner */}
-      <div className="w-full bg-purple-900 text-white py-28 px-4 md:px-8 lg:px-16">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Slide Design</h1>
-          {/* <p className="text-xl md:text-2xl">Checkout some of our slide designs from over the years</p> */}
+      <div className="w-full relative overflow-hidden h-64 md:h-80 lg:h-96"> {/* Added fixed height */}
+        <img 
+          src={banner} 
+          alt="Banner background" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 "></div>
+        <div className="relative z-10 h-full flex items-center justify-center"> {/* Added flex container */}
+          <div className="text-center text-white"> {/* Centered text container */}
+            <h1 className="text-4xl md:text-5xl font-bold">Slide Design</h1>
+            {/* <p className="text-xl md:text-2xl mt-4">Checkout some of our slide designs from over the years</p> */}
+          </div>
         </div>
       </div>
 
