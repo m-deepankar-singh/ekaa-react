@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { Users, MapPin, Phone } from 'lucide-react';
-import axios from 'axios';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // Fix for default marker icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -26,28 +26,79 @@ const ContactPage: React.FC = () => {
     regarding: '',
     message: '',
   });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitStatus, setSubmitStatus] = useState<{ status: string; message: string } | null>(null);
+  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+    }
+    if (!formData.regarding) newErrors.regarding = "Please select an option";
+    if (!recaptchaValue) newErrors.recaptcha = "Please complete the reCAPTCHA";
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({ ...prevState, [name]: value }));
+    // Clear the error for this field if it exists
+    if (errors[name]) {
+      setErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post('/path/to/your/contact-form-handler.php', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      setSubmitStatus(response.data);
-      if (response.data.status === 'success') {
+  const handleRecaptchaChange = (value: string | null) => {
+    setRecaptchaValue(value);
+    if (errors.recaptcha) {
+      setErrors(prevErrors => ({ ...prevErrors, recaptcha: '' }));
+    }
+  };
+
+const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setSubmitStatus(null);
+  
+  if (!validateForm()) {
+    setSubmitStatus({ status: 'error', message: 'Please correct the errors in the form.' });
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const formDataToSend = new FormData();
+    Object.keys(formData).forEach(key => {
+      formDataToSend.append(key, formData[key as keyof typeof formData]);
+    });
+    formDataToSend.append('recaptchaToken', recaptchaValue || '');
+
+    const response = await fetch('/contact.php', {
+      method: 'POST', 
+      body: formDataToSend,
+    });      
+    const data = await response.json();
+    console.log('Form submission response:', data);
+      setSubmitStatus(data);
+      if (data.status === 'success') {
         setFormData({ name: '', phone: '', email: '', regarding: '', message: '' });
+        recaptchaRef.current?.reset();
+        setRecaptchaValue(null);
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setSubmitStatus({ status: 'error', message: 'An error occurred. Please try again later.' });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -119,9 +170,10 @@ const ContactPage: React.FC = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       placeholder="Enter Name"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                      className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                       required
                     />
+                    {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                   </div>
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
@@ -132,9 +184,10 @@ const ContactPage: React.FC = () => {
                       value={formData.phone}
                       onChange={handleInputChange}
                       placeholder="Enter Phone Number"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                      className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
                       required
                     />
+                    {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
                   </div>
                 </div>
                 <div>
@@ -146,9 +199,10 @@ const ContactPage: React.FC = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="Enter Email address"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                     required
                   />
+                  {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
                 </div>
                 <div>
                   <label htmlFor="regarding" className="block text-sm font-medium text-gray-700 mb-1">Regarding *</label>
@@ -157,7 +211,7 @@ const ContactPage: React.FC = () => {
                     name="regarding"
                     value={formData.regarding}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 ${errors.regarding ? 'border-red-500' : 'border-gray-300'}`}
                     required
                   >
                     <option value="">Select an option</option>
@@ -169,6 +223,7 @@ const ContactPage: React.FC = () => {
                     <option value="general-inquiry">General Inquiry</option>
                     <option value="other">Other</option>
                   </select>
+                  {errors.regarding && <p className="mt-1 text-xs text-red-500">{errors.regarding}</p>}
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
@@ -182,8 +237,24 @@ const ContactPage: React.FC = () => {
                     rows={4}
                   ></textarea>
                 </div>
-                <button type="submit" className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition duration-150 ease-in-out">
-                  Submit
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey="6LdCPjMqAAAAAHOPs1Jt36RDSnGtwmTwusEy4JR-"
+                    onChange={handleRecaptchaChange}
+                  />
+                </div>
+                {errors.recaptcha && <p className="mt-1 text-xs text-red-500 text-center">{errors.recaptcha}</p>}
+                <button 
+                  type="submit" 
+                  className={`w-full py-2 px-4 rounded-md transition duration-150 ease-in-out ${
+                    !isSubmitting && recaptchaValue
+                      ? 'bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2'
+                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  }`}
+                  disabled={isSubmitting || !recaptchaValue}
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
               </form>
             </div>
