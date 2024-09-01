@@ -12,7 +12,7 @@ import work3After from "./images/Before & After/After 3.png";
 
 // Import your background image
 import backgroundImage from "./images/About Us/About Ekaa.jpg";
-
+import banner from './images/Pitch Deck Banner.jpg'
 import agro from "./images/ClientsPortPage/1.jpg";
 import bigtruck from "./images/ClientsPortPage/2.jpg";
 import codecrux from "./images/ClientsPortPage/3.jpg";
@@ -281,14 +281,16 @@ const Portfolio: React.FC = () => {
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
-      <div className="relative h-48 md:h-64 lg:h-80 flex items-center justify-center">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        ></div>
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 text-center">
+    {/* Hero Section */}
+    <div className="relative h-48 md:h-64 lg:h-80 overflow-hidden">
+      <img 
+        src={banner} 
+        alt="Hero background" 
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="relative z-10 h-full flex items-center justify-center">
+        <div className="text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
             Pitch Deck
           </h1>
@@ -297,6 +299,7 @@ const Portfolio: React.FC = () => {
           </p>
         </div>
       </div>
+    </div>
       {/* 16:9 Rectangle Carousel */}
       <div className="container mx-auto px-4 py-16">
         <div className="relative">
