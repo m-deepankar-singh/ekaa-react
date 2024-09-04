@@ -417,32 +417,32 @@ const Services: React.FC = () => {
           <h2 className="text-2xl font-bold mb-8 text-center">FAQ</h2>
           <div className="space-y-4">
             <FAQItem
-              question="How fast can you provide a first draft?"
-              answer="We typically deliver the first draft within 5-7 business days, depending on the complexity of your project and our current workload."
+              question="What is the expected delivery timeframe?"
+              answer="The first draft is delivered within 5-7 business days after receiving the required information. Revisions are completed within a few days, depending on client response time."
             />
             <FAQItem
-              question="Will I be able to edit the final deck myself?"
-              answer="Yes, we provide editable files in formats like PowerPoint or Keynote, allowing you to make further adjustments as needed."
+              question="What topics will be included in the pitch deck?"
+              answer="The pitch deck will comprehensively cover all key elements required for an effective investor presentation, including the problem, solution, market opportunity, product, business model, team, financials, and investment ask. Each section is designed to provide a clear and compelling narrative that addresses investor needs and expectations."
             />
             <FAQItem
-              question="Will my pitch deck be kept confidential?"
-              answer="Absolutely. We treat all client information with the utmost confidentiality and can sign an NDA if required."
+              question="What information do I need to provide?"
+              answer="We require comprehensive information about your company, including the business model, financial projections, team profiles, and any other details necessary for crafting a compelling investor pitch deck."
             />
             <FAQItem
-              question="How can I give feedback on the project?"
-              answer="We have a structured feedback process where you can provide comments and suggestions directly on the draft. We also schedule review calls to discuss your feedback in detail."
+              question="In what format is the Investor Pitch Deck prepared and delivered?"
+              answer="The Investor Pitch Deck is prepared and delivered in PowerPoint (PPT) format, with the option to provide a PDF version if needed."
             />
             <FAQItem
-              question="Can you assist with research and content creation?"
-              answer="Yes, our team can help with market research, competitor analysis, and content creation to enhance your pitch deck."
+              question="How many slides does the pitch deck contain?"
+              answer="The pitch deck typically contains 12-15 slides, depending on the project’s requirements."
             />
             <FAQItem
-              question="What is the average pitch deck design cost?"
-              answer="The cost varies depending on the scope of work, and we can provide more details based on your specific requirements."
+              question="What is the process to initiate the project?"
+              answer="To initiate the project, we will start by sharing the engagement letter and invoice. Once the engagement formalities are completed, we can begin the work."
             />
             <FAQItem
-              question="How much time does it take to design a 20-slide presentation?"
-              answer="On average, a 20-slide presentation takes about 2-3 weeks from initial consultation to final delivery, including revisions."
+              question="Will you be facilitating introductions to investors?"
+              answer="While we specialize in creating pitch decks, we do not directly connect clients with investors."
             />
           </div>
         </div>

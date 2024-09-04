@@ -338,7 +338,7 @@ const PitchReDesign: React.FC = () => {
                   +91-9010-221-000
                 </a>
                 <p className="text-sm text-gray-600 mt-2">
-                  09:30 AM - 07:00 PM IST
+                  09:30 AM - 06:30 PM IST
                 </p>
               </div>
             </div>

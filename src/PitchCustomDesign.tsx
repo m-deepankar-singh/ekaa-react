@@ -45,6 +45,7 @@ import icon2 from "./images/Achivements/icon2.png";
 import icon3 from "./images/Achivements/icon3.png";
 import icon4 from "./images/Achivements/icon4.png";
 import banner from "./images/Banners/Investor Pitch Deck Custom Design.jpg"
+import { Link } from "react-router-dom";
 
 
 
@@ -348,10 +349,11 @@ useEffect(() => {
           <h2 className="text-2xl md:text-3xl font-bold text-white md:w-2/3">
             Design Services: Get our Team of Experts to Design your Pitch Deck
           </h2>
-          <button className="bg-white text-purple-600 px-4 py-2 rounded-full flex items-center text-sm">
+          <Link to={"/contact-us"} ><button className="bg-white text-purple-600 px-4 py-2 rounded-full flex items-center text-sm">
             <Phone className="mr-2" size={16} />
             Contact US
           </button>
+          </Link>
         </Container>
       </div>
 

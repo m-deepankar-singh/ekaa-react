@@ -582,7 +582,7 @@ const TestimonialsSection: React.FC = () => {
 
 const ElfsightWidget: React.FC = () => {
   useEffect(() => {
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = "https://apps.elfsight.com/p/platform.js";
     script.defer = true;
     document.body.appendChild(script);
@@ -604,29 +604,39 @@ const ElfsightWidget: React.FC = () => {
 const FAQSection: React.FC = () => {
   const faqs = [
     {
-      question: "How fast can you provide a first draft?",
+      question: "What is the expected delivery timeframe?",
       answer:
-        "4-5 working days from when the client shares complete information. However, in some cases, based on the project pipeline, we take a few days more to deliver the first draft. This timeline is worked out during the initial discussions themselves.",
+        "The first draft is delivered within 5-7 business days after receiving the required information. Revisions are completed within a few days, depending on client response time.",
     },
     {
-      question: "Will I be able to edit the final deck myself?",
+      question: "What topics will be included in the pitch deck?",
       answer:
-        "Yes. As soon as we finish the closing formalities, we will share the editable Powerpoint version of your pitch deck.",
+        "The pitch deck will comprehensively cover all key elements required for an effective investor presentation, including the problem, solution, market opportunity, product, business model, team, financials, and investment ask. Each section is designed to provide a clear and compelling narrative that addresses investor needs and expectations.",
     },
     {
-      question: "Will my pitch deck be kept confidential?",
+      question: "What information do I need to provide?",
       answer:
-        "Yes, definitely. We have our confidentiality clause in our engagement letter and are open to signing a Non-Disclosure Agreement.",
+        "We require comprehensive information about your company, including the business model, financial projections, team profiles, and any other details necessary for crafting a compelling investor pitch deck.",
     },
     {
-      question: "Can you assist with research and content creation?",
+      question: "In what format is the Investor Pitch Deck prepared and delivered?",
       answer:
-        "Yes. We collect the market information required to craft the best Investor Pitch Deck. The data is sourced from various free research reports, secondary sources, and press releases.",
+        "The Investor Pitch Deck is prepared and delivered in PowerPoint (PPT) format, with the option to provide a PDF version if needed.",
     },
     {
-      question: "What is the average pitch deck design cost?",
+      question: "How many slides does the pitch deck contain?",
       answer:
-        "The cost varies depending on the scope of work, and we can provide more details based on your specific requirements.",
+        "The pitch deck typically contains 12-15 slides, depending on the project’s requirements.",
+    },
+    {
+      question: "What is the process to initiate the project?",
+      answer:
+        "To initiate the project, we will start by sharing the engagement letter and invoice. Once the engagement formalities are completed, we can begin the work.",
+    },
+    {
+      question: "Will you be facilitating introductions to investors?",
+      answer:
+        "While we specialize in creating pitch decks, we do not directly connect clients with investors.",
     },
   ];
 
@@ -654,7 +664,9 @@ const ConsultationSection: React.FC = () => (
     <Container>
       <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
         <div className="text-center md:text-left">
-          <h2 className="text-2xl md:text-3xl font-bold text-blue-800">Having Questions</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-blue-800">
+            Having Questions
+          </h2>
           <p className="text-xl md:text-2xl font-semibold text-purple-600 mt-2">
             Ask for Free Consultation Now
           </p>
@@ -666,13 +678,14 @@ const ConsultationSection: React.FC = () => (
           >
             +91-9010-221-000
           </a>
-          <p className="text-gray-600 mt-2 text-sm md:text-base">09:30 AM - 07:00 PM IST</p>
+          <p className="text-gray-600 mt-2 text-sm md:text-base">
+            09:30 AM - 06:30 PM IST
+          </p>
         </div>
       </div>
     </Container>
   </section>
 );
-
 
 const clientLogos = [
   { name: "Client 1", logo: client1Logo },
@@ -750,8 +763,8 @@ const ClientLogos: React.FC = () => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -765,11 +778,16 @@ const ClientLogos: React.FC = () => {
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{
-                transform: `translateX(-${currentIndex * (100 / visibleLogos)}%)`,
+                transform: `translateX(-${
+                  currentIndex * (100 / visibleLogos)
+                }%)`,
               }}
             >
               {clientLogos.map((client, index) => (
-                <div key={index} className={`flex-shrink-0 w-1/${visibleLogos} px-2 md:px-4`}>
+                <div
+                  key={index}
+                  className={`flex-shrink-0 w-1/${visibleLogos} px-2 md:px-4`}
+                >
                   <img
                     src={client.logo}
                     alt={`${client.name} logo`}
@@ -799,7 +817,7 @@ const HomePage: React.FC = () => {
       <ProcessSection />
       <OurWorksSection />
       <TestimonialsSection />
-      <ElfsightWidget/>
+      <ElfsightWidget />
       <FAQSection />
       <ConsultationSection />
       <ClientLogos />

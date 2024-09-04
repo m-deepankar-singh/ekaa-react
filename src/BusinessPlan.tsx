@@ -307,10 +307,10 @@ const BusinessPlan: React.FC = () => {
               ))}
             </div>
         </div>
-        <div className="md:w-1/3 md:sticky md:top-0 md:h-screen md:overflow-y-auto">
-          <div className="p-4">
+        <div className="md:w-1/3 md:sticky md:top-2 md:h-screen">
+          {/* <div className="p-4"> */}
             <CallbackForm />
-          </div>
+          {/* </div> */}
         </div>
       </div>
       </Container>

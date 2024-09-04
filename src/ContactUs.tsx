@@ -154,7 +154,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           <div className="lg:w-2/3 mt-10 lg:mt-0">
             <div className="bg-white p-8 rounded-lg shadow-md">
               <h2 className="text-2xl font-bold mb-6 text-gray-800">Reach Us</h2>
-              {submitStatus && (
+              <div className="elfsight-app-1f8f79ea-76bf-4d99-9735-22168c396f41" data-elfsight-app-lazy></div>
+              {/* {submitStatus && (
                 <div className={`mb-4 p-2 rounded ${submitStatus.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                   {submitStatus.message}
                 </div>
@@ -256,7 +257,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
                 >
                   {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
-              </form>
+              </form> */}
             </div>
             <div className="h-96 mt-10 shadow-md rounded-lg overflow-hidden relative z-0">
               <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>

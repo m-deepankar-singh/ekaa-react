@@ -62,12 +62,12 @@ const CallbackForm: React.FC = () => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">Request a Callback</h2>
-      {submitStatus && (
+      {/* {submitStatus && (
         <div className={`mb-4 p-2 rounded ${submitStatus.status === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
           {submitStatus.message}
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
+      )} */}
+      {/* <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
             htmlFor="name"
@@ -204,7 +204,9 @@ const CallbackForm: React.FC = () => {
             Send
           </button>
         </div>
-      </form>
+      </form> */}
+            <div className="elfsight-app-1f8f79ea-76bf-4d99-9735-22168c396f41" data-elfsight-app-lazy></div>
+
     </div>
   );
 };
