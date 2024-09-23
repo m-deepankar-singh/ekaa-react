@@ -79,6 +79,9 @@ const StatItem: React.FC<{
 const AboutPage: React.FC = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [slidesToShow, setSlidesToShow] = useState(3);
+    const [isMobile, setIsMobile] = useState(false);
+
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % works.length);
@@ -91,9 +94,27 @@ const AboutPage: React.FC = () => {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const intervalId = setInterval(nextSlide, 5000);
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
+
+  const visibleWorks = isMobile
+    ? [works[currentIndex]]
+    : [
+        works[currentIndex],
+        works[(currentIndex + 1) % works.length],
+        works[(currentIndex + 2) % works.length],
+      ];
 
   return (
     <div className="flex flex-col min-h-screen py-24">
@@ -285,44 +306,43 @@ const AboutPage: React.FC = () => {
         </Container>
       </div>
 
-      {/* Our Works Section */}
+      
       <Container className="py-12">
       <h2 className="text-4xl font-bold mb-4 text-center">Our Works</h2>
-        <p className="text-center mb-12">
-          Some samples of our presentation design work
-        </p>
-        <div className="relative">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
-            >
-              {works.map((work, index) => (
-                <div key={index} className="w-1/3 flex-shrink-0 px-2">
+      <p className="text-center mb-12">
+        Some samples of our presentation design work
+      </p>
+      <div className="relative">
+        <div className="overflow-hidden">
+          <div className="flex transition-transform duration-500 ease-in-out">
+            {visibleWorks.map((work, index) => (
+              <div key={index} className={`flex-shrink-0 px-2 ${isMobile ? 'w-full' : 'w-1/3'}`}>
+                <div className="relative pb-[56.25%]"> {/* 16:9 aspect ratio */}
                   <img
                     src={work.image}
                     alt={work.title}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
+                    className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-md"
                   />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-purple-600 text-white p-2 rounded-full shadow-md"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-purple-600 text-white p-2 rounded-full shadow-md"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
         </div>
-      </Container>
-    </div>
+        <button
+          onClick={prevSlide}
+          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-purple-600 text-white p-2 rounded-full shadow-md"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-purple-600 text-white p-2 rounded-full shadow-md"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      </div>
+    </Container>
+     </div>
   );
 };
 

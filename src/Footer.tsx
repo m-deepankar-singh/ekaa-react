@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Linkedin, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import elogo from "./images/Logos/E  white.png";
 import logo from "./images/Logos/Ekaa In white-10.png";
 
@@ -51,6 +51,17 @@ const Footer: React.FC = () => {
                   size={24}
                 />
               </a>
+              <a
+                href="https://www.instagram.com/ekaapitch/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <Instagram
+                  className="text-blue-500 hover:text-blue-400"
+                  size={24}
+                />
+               </a>
             </div>
           </div>
 

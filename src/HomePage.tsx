@@ -472,20 +472,35 @@ const OurWorksSection: React.FC = () => {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidesToShow, setSlidesToShow] = useState(3);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % works.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + works.length) % works.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + works.length) % works.length);
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setSlidesToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setSlidesToShow(2);
+      } else {
+        setSlidesToShow(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const intervalId = setInterval(nextSlide, 5000);
-    return () => clearInterval(intervalId);
+    return () => {
+      clearInterval(intervalId);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
@@ -499,15 +514,17 @@ const OurWorksSection: React.FC = () => {
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 33.33}%)` }}
+              style={{ transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)` }}
             >
               {works.map((work, index) => (
-                <div key={index} className="w-1/3 flex-shrink-0 px-2">
-                  <img
-                    src={work.image}
-                    alt={work.title}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
-                  />
+                <div key={index} className={`flex-shrink-0 px-2 ${slidesToShow === 1 ? 'w-full' : slidesToShow === 2 ? 'w-1/2' : 'w-1/3'}`}>
+                  <div className="relative pb-[56.25%]"> {/* 16:9 aspect ratio */}
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="absolute top-0 left-0 w-full h-full object-cover rounded-lg shadow-md"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -727,21 +744,17 @@ const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => (
   </button>
 );
 
-const ClientLogos: React.FC = () => {
+const ClientLogos = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleLogos, setVisibleLogos] = useState(5);
+  const [visibleLogos, setVisibleLogos] = useState(1);
   const logoCount = clientLogos.length;
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === logoCount - visibleLogos ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % logoCount);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? logoCount - visibleLogos : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + logoCount) % logoCount);
   };
 
   useEffect(() => {
@@ -752,13 +765,13 @@ const ClientLogos: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setVisibleLogos(2);
+        setVisibleLogos(1);
       } else if (window.innerWidth < 768) {
-        setVisibleLogos(3);
+        setVisibleLogos(2);
       } else if (window.innerWidth < 1024) {
-        setVisibleLogos(4);
+        setVisibleLogos(3);
       } else {
-        setVisibleLogos(5);
+        setVisibleLogos(4);
       }
     };
 
@@ -773,26 +786,26 @@ const ClientLogos: React.FC = () => {
         <h2 className="text-2xl md:text-3xl font-bold mb-8 md:mb-12 text-center text-gray-800">
           Our Trusted Clients
         </h2>
-        <div className="relative px-8 md:px-10">
+        <div className="relative px-4 md:px-10">
           <div className="overflow-hidden">
             <div
               className="flex transition-transform duration-300 ease-in-out"
               style={{
-                transform: `translateX(-${
-                  currentIndex * (100 / visibleLogos)
-                }%)`,
+                transform: `translateX(-${currentIndex * (100 / visibleLogos)}%)`,
               }}
             >
               {clientLogos.map((client, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 w-1/${visibleLogos} px-2 md:px-4`}
+                  className="flex-shrink-0 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-2 md:px-4"
                 >
-                  <img
-                    src={client.logo}
-                    alt={`${client.name} logo`}
-                    className="h-16 sm:h-20 md:h-24 lg:h-32 mx-auto object-contain"
-                  />
+                  <div className="relative w-full pb-[56.25%]"> {/* 16:9 aspect ratio */}
+                    <img
+                      src={client.logo}
+                      alt={`${client.name} logo`}
+                      className="absolute inset-0 w-full h-full object-contain"
+                    />
+                  </div>
                 </div>
               ))}
             </div>

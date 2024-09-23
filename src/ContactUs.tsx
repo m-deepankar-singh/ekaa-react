@@ -127,7 +127,7 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
           {/* Contact Information */}
           <div className="lg:w-1/3">
             <h2 className="text-2xl font-bold mb-4 text-gray-800">Hyderabad Office</h2>
-            <p className="font-semibold">Ekaa Pitch (Ekaa Business Solutions)</p>
+            <p className="font-semibold">Ekaa Business Solutions (Ekaa Pitch)</p>
             <p>6-3-634, A1&2, II Floor,</p>
             <p>Green Channel Apts, Khairtabad,</p>
             <p>Hyderabad-500 004, Telangana, India</p>
